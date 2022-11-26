@@ -26,7 +26,7 @@
         width: 70vw;
         height: 80vh;
         border-radius: 0.75rem;
-        border: 2px solid #008fc9;
+        border: 4px solid #008fc9;
         transform: translate(-50%, -50%);
       }
       #markers-scores {
@@ -37,32 +37,57 @@
         padding: 1rem 2rem;
         border-radius: 0.75rem;
         border: 2px solid #008fc9;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(16px);
-        color: #fff;
         font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        font-size: 1rem;
+        font-size: 0.8rem;
         line-height: 1.4;
         text-align: left;
       }
-      #markers-scores td {
-        font-size: 0.8em;
+      #total-score {
+        border-top: #008fc9 solid 2px;
+        padding-top: 4px;
+        font-size: 1.2em;
+        font-weight: 700;
+      }
+      .border-top {
+        border-top: #008fc9 solid 2px;
+        font-size: 1.2em;
       }
     </style>
   </head>
   <body>
     <div id="map"></div>
     <table id="markers-scores">
-      <tr>
-        <th>Markers:</th>
+      <tr style="color: black">
+        <th>Black:</th>
+        <td>10</td>
+      </tr>
+      <tr style="color: gray">
+        <th>Gray:</th>
         <td>0</td>
       </tr>
-      <tr>
-        <th>Total:</th>
+      <tr style="color: red">
+        <th>Red:</th>
         <td>0</td>
+      </tr>
+      <tr style="color: orange">
+        <th>Orange:</th>
+        <td>0</td>
+      </tr>
+      <tr style="color: lime">
+        <th>Lime:</th>
+        <td>0</td>
+      </tr>
+      <tr style="color: green">
+        <th>Green:</th>
+        <td>0</td>
+      </tr>
+      <tr style="color: #008fc9">
+        <th id="total-score"><b>Total:</b></th>
+        <td class="border-top">0</td>
       </tr>
     </table>
-    <script src="./ejs.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

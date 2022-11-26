@@ -56,8 +56,6 @@ mapboxgl.accessToken =
 // My city to start from
 const brzeg = new mapboxgl.LngLat(17.467274706589915, 50.86297736970255);
 
-// const userMarkers = [];
-
 // Create a new map
 const map = new mapboxgl.Map({
   container: "map", // container ID
@@ -75,10 +73,7 @@ map.on("click", (e) => {
   const userMarker = new mapboxgl.Marker({ color: colorsArray[randomNumber] })
     .setLngLat(e.lngLat)
     .addTo(map);
-  // userMarkers.push(userMarker);
 
   // Set marker score
   setMarkerScore(randomNumber);
-  // console.log(markersTotalScore);
-  // console.log(markerGray, markerRed, markerOrange, markerLime, markerGreen, markerBlack);
 });
