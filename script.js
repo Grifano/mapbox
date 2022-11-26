@@ -7,14 +7,47 @@
 // User can remove existing marker.
 // On the top right corner user can see a table with total markers amount and amount of markers for each score.
 // Example:
-// Total: 100 Five: 50 Four: 30 Three: 10 Two: 10 One: 0 Zero: 0
+// ✅ Total: 100 Five: 50 Four: 30 Three: 10 Two: 10 One: 0 Zero: 0
 // User can export markers to .json file and download it.
 
+// *** Variables:
+let markersTotalScore = 0;
+const colorsArray = ["gray", "red", "orange", "lime", "green", "black"];
+let markerBlack = 0;
+let markerGray = 0;
+let markerRed = 0;
+let markerOrange = 0;
+let markerLime = 0;
+let markerGreen = 0;
+
 // *** Functions:
-// get rundom score max 5
-function getRandomScore() {
-  return Math.floor(Math.random() * 5);
-}
+// ? set score according to marker color
+const setMarkerScore = (index) => {
+  switch (colorsArray[index]) {
+    case "gray":
+      markerGray += 1;
+      break;
+    case "red":
+      markerRed += 2;
+      break;
+    case "orange":
+      markerOrange += 3;
+      break;
+    case "lime":
+      markerLime += 4;
+      break;
+    case "green":
+      markerGreen += 5;
+      break;
+    default:
+      markerBlack += 0;
+      break;
+  }
+
+  // Set markers total score
+  markersTotalScore =
+    markerGray + markerRed + markerOrange + markerLime + markerGreen + markerBlack;
+};
 
 // Setup the acceess
 mapboxgl.accessToken =
@@ -22,11 +55,8 @@ mapboxgl.accessToken =
 
 // My city to start from
 const brzeg = new mapboxgl.LngLat(17.467274706589915, 50.86297736970255);
-const userMarker = {
-  color: "",
-  score: 0,
-};
-const userMarkers = [];
+
+// const userMarkers = [];
 
 // Create a new map
 const map = new mapboxgl.Map({
@@ -38,28 +68,17 @@ const map = new mapboxgl.Map({
 
 // Place the marker by clicking on the map
 map.on("click", (e) => {
-  let color = "black";
+  // Get random number for index, to get a random color form colorsArray
+  const randomNumber = Math.floor(Math.random() * 6);
 
-  switch (getRandomScore()) {
-    case 1:
-      color = "gray";
-      break;
-    case 2:
-      color = "red";
-      break;
-    case 3:
-      color = "orange";
-      break;
-    case 4:
-      color = "lime";
-      break;
-    case 5:
-      color = "green";
-      break;
-    default:
-      break;
-  }
+  // Add marker
+  const userMarker = new mapboxgl.Marker({ color: colorsArray[randomNumber] })
+    .setLngLat(e.lngLat)
+    .addTo(map);
+  // userMarkers.push(userMarker);
 
-  const userMarker = new mapboxgl.Marker({ color: color }).setLngLat(e.lngLat).addTo(map);
-  userMarkers.push(userMarker);
+  // Set marker score
+  setMarkerScore(randomNumber);
+  // console.log(markersTotalScore);
+  // console.log(markerGray, markerRed, markerOrange, markerLime, markerGreen, markerBlack);
 });
